@@ -16,5 +16,11 @@ router.use(passport.initialize())
 router.use(passport.session())
 
 
+// Passport odradjuje sve , nece biti potrebe izdvajati logout rutu!
+router.get('/logout', (req, res) => {
+    req.logout()
+    res.redirect('/')
+  })
+
   
 module.exports = router
