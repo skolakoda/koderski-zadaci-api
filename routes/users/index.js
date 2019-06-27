@@ -1,7 +1,7 @@
 const express = require('express')
 const passport = require('passport')
 const router = express.Router()
-const GitHubStrategy = require('passport-github2').Strategy;
+//const GitHubStrategy = require('passport-github2').Strategy
 
 // Passport session setup
 passport.serializeUser(function(user, done) {
