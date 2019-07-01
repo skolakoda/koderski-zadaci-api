@@ -1,9 +1,10 @@
+require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const port = process.env.PORT || 8080
 
-const userRouter = require('./routes/users/index')
+const userRouter = require('./routes/auth/')
 
 // Config
 const app = express()
@@ -12,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 // Routes
-app.use('/users', userRouter)
+app.use('/auth', userRouter)
 app.get('/', (req, res) => res.send('Dobrodosli na Koderski-Zadaci-API!'))
 
 

@@ -1,12 +1,9 @@
 const express = require('express')
 const passport = require('passport')
 const router = express.Router()
+const { cID, cSecret } = require('../../utils/config')
 const GitHubStrategy = require('passport-github2').Strategy
 
-const GITHUB_CLIENT_ID = "f0dabb36cf5edeac0717"
-const GITHUB_CLIENT_SECRET = "8540a41f076f0a466cf18ab2dd40b560d9101074"
-
-router.get('/auth', (req, res) => res.sendFile('auth.html', { root : __dirname}))
 // Passport session setup
 passport.serializeUser((user, done) => {
     done(null, user)
@@ -23,8 +20,8 @@ router.get('/success', (req, res) => res.send('You have successfully logged in')
 router.get('/error', (req, res) => res.send('error logging in'))
 
 passport.use(new GitHubStrategy({
-    clientID: GITHUB_CLIENT_ID,
-    clientSecret: GITHUB_CLIENT_SECRET,
+    clientID: cID,
+    clientSecret: cSecret,
     callbackURL: '/auth/github/callback'
   },
   function(accessToken, refreshToken, profile, cb) {
@@ -32,19 +29,13 @@ passport.use(new GitHubStrategy({
   }
 ))
 
-router.get('/auth/github',
+router.get('/github', 
   passport.authenticate('github'))
 
-router.get('/auth/github/callback',
+router.get('/github/callback', 
   passport.authenticate('github', { failureRedirect: '/error' }),
   function(req, res) {
-    res.redirect('/success')
+    res.redirect('/auth/success')
   })
 
-// Passport odradjuje sve , nece biti potrebe izdvajati logout rutu!
-router.get('/logout', (req, res) => {
-    req.logout()
-    res.redirect('/')
-  })
-  
 module.exports = router
