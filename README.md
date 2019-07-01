@@ -2,6 +2,9 @@
 
 ## API Dokumentacija
 
+### Autentikacija
+
+Login ruta: /auth/github
 
 ### Model zadatka
 

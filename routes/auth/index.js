@@ -12,11 +12,16 @@ passport.serializeUser((user, done) => {
   passport.deserializeUser((obj, done) => {
     done(null, obj)
   })
+
 // Inicijalizacija Passport-a
 router.use(passport.initialize())
 router.use(passport.session())
 
-router.get('/success', (req, res) => res.send('You have successfully logged in'))
+router.get('/success', (req, res) => {
+  console.log(req.user);
+  
+  res.send('You have successfully logged in')
+})
 router.get('/error', (req, res) => res.send('error logging in'))
 
 passport.use(new GitHubStrategy({
