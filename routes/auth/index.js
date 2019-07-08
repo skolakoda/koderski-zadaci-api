@@ -2,6 +2,7 @@ const express = require('express')
 const passport = require('passport')
 const router = express.Router()
 const { cID, cSecret } = require('../../utils/config')
+const User = require('../../models/User')
 const GitHubStrategy = require('passport-github2').Strategy
 
 // Passport session setup
@@ -18,9 +19,9 @@ router.use(passport.initialize())
 router.use(passport.session())
 
 router.get('/success', (req, res) => {
-  console.log(req.user);
-  
   res.send('You have successfully logged in')
+  const token = user.napraviToken()
+  res.header('x-auth-token', token).json({msg: 'Dobili ste pristupni token', data: token})
 })
 router.get('/error', (req, res) => res.send('error logging in'))
 

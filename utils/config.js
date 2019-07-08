@@ -1,6 +1,7 @@
 const port = process.env.PORT || 8080
 const cID = process.env.CLIENTID
 const cSecret = process.env.CLIENTSECRET
+const tokenKey = process.env.TOKEN
 
 const domain =
   process.env.NODE_ENV === 'development'
@@ -11,5 +12,6 @@ module.exports = {
     port,
     cID,
     cSecret,
-    domain
+    domain,
+    tokenKey
 }
