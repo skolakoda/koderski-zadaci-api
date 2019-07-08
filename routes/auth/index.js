@@ -21,7 +21,7 @@ router.use(passport.session())
 router.get('/success', (req, res) => {
   const { email } = req.email
   res.send('You have successfully logged in')
-  const user = await User.findOne({ email })
+  const user =  User.findOne({ email })
   if(!user){
     const noviUser = new User ({ email })
     const token = user.napraviToken()
