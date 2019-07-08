@@ -19,7 +19,7 @@ router.use(passport.initialize())
 router.use(passport.session())
 
 router.get('/success', (req, res) => {
-  const { email } = req.email
+  const { email } = req.user.email
   res.send('You have successfully logged in')
   const user =  User.findOne({ email })
   if(!user){
