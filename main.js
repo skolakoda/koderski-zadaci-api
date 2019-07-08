@@ -3,9 +3,9 @@ const express = require('express')
 const session = require('express-session')
 const cors = require('cors')
 const bodyParser = require('body-parser')
-const port = process.env.PORT || 8080
 
 const userRouter = require('./routes/auth/')
+const { port, domain } = require('./utils/config')
 
 // Config
 const app = express()
@@ -19,5 +19,5 @@ app.use('/auth', userRouter)
 app.get('/', (req, res) => res.send('Dobrodosli na Koderski-Zadaci-API!'))
 
 //Server
-app.listen(port, () => console.log(`Server started at port: ${port}`)
+app.listen(port, () => console.log(`Server started at: ${domain}`)
 )
