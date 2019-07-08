@@ -12,7 +12,7 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-app.use(session({ secret: 'bla bla' }))
+app.use(session({ resave: true, saveUninitialized: true,  secret: 'tajna' }))
 
 // Routes
 app.use('/auth', userRouter)
