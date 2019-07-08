@@ -19,7 +19,17 @@ router.use(passport.initialize())
 router.use(passport.session())
 
 router.get('/success', (req, res) => {
+  const { email } = req.email
   res.send('You have successfully logged in')
+  const user = await User.findOne({ email })
+  if(!user){
+    const noviUser = new User ({ email })
+    const token = user.napraviToken()
+    noviUser.save()
+    .then(data => console.log(`Ubacen u bazu: ${data.email}`)
+      , res.header('x-auth-token', token).json({msg: 'Dobili ste pristupni token', data: token}))
+    .catch(err => res.status(400).send(err.message))
+  } 
   const token = user.napraviToken()
   res.header('x-auth-token', token).json({msg: 'Dobili ste pristupni token', data: token})
 })
