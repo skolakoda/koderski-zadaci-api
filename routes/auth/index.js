@@ -18,21 +18,26 @@ passport.serializeUser((user, done) => {
 router.use(passport.initialize())
 router.use(passport.session())
 
-router.get('/success', (req, res) => {
-  const { email } = req.user.email
-  res.send('You have successfully logged in')
-  const user =  User.findOne({ email })
-  if(!user){
-    const noviUser = new User ({ email })
-    const token = user.napraviToken()
+router.get('/success', async (req, res) => {
+  const email  = req.user.emails[0].value
+  const slika  = req.user.photos[0].value
+  const { displayName: ime, username, profileUrl: url } = req.user
+  const user = await User.findOne({ email })
+  
+  if(user){
+    console.log(`Korisnik vec postoji`)
+    res.redirect('/')
+  }
+
+  const noviUser = new User ({ email, slika, ime, username, url })
+    const token = noviUser.napraviToken()
     noviUser.save()
-    .then(data => console.log(`Ubacen u bazu: ${data.email}`)
-      , res.header('x-auth-token', token).json({msg: 'Dobili ste pristupni token', data: token}))
+    .then(data => {console.log(`Ubacen u bazu: ${data.email} + ${noviUser}`)
+      res.header('x-auth-token', token).json({msg: 'Dobili ste pristupni token', data: token})})
     .catch(err => res.status(400).send(err.message))
-  } 
-  const token = user.napraviToken()
-  res.header('x-auth-token', token).json({msg: 'Dobili ste pristupni token', data: token})
+    res.send('You have successfully logged in')
 })
+
 router.get('/error', (req, res) => res.send('error logging in'))
 
 passport.use(new GitHubStrategy({
@@ -52,6 +57,11 @@ router.get('/github/callback',
   passport.authenticate('github', { failureRedirect: '/error' }),
   function(req, res) {
     res.redirect('/auth/success')
+  })
+
+  router.get('/logout', (req, res) => {
+    req.logout()
+    res.redirect('/')
   })
 
 module.exports = router

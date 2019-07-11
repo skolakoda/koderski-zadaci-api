@@ -26,7 +26,7 @@ const ZadatakSchema = new mongoose.Schema({
     min: 0,
     max: 10
   },
-})
+}, {timestamps: true})
 
 ZadatakSchema.plugin(uniqueValidator) // mora da bi radilo unique
 

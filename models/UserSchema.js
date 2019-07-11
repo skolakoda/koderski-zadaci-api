@@ -2,6 +2,8 @@ const mongoose = require('mongoose')
 const uniqueValidator = require('mongoose-unique-validator')
 const jwt = require('jsonwebtoken')
 
+const { tokenKey } = require('../utils/config')
+
 const UserSchema = new mongoose.Schema({
   email: {
     type: String,
@@ -9,11 +11,11 @@ const UserSchema = new mongoose.Schema({
     unique: true,
     required: true
   },
-  password: {
-    type: String,
-    minlength: 6
-  },
   ime: {
+    type: String,
+    trim: true
+  },
+  username: {
     type: String,
     trim: true
   },
@@ -26,8 +28,16 @@ const UserSchema = new mongoose.Schema({
       type: Number,
       min: 0,
       max: 1000
-  }
-})
+  },
+  slika: {
+    type: String,
+    trim: true
+  },
+  url: {
+    type: String,
+    trim: true
+  },
+}, {timestamps: true}) 
 
 UserSchema.methods.napraviToken = function() {
   return jwt.sign({ _id: this._id, role: this.role }, tokenKey, { expiresIn: '30d' })
