@@ -26,9 +26,10 @@ router.get('/success', async (req, res) => {
   
   if(user){
     console.log(`Korisnik vec postoji`)
+    const token = user.napraviToken()
+    res.header('x-auth-token', token)
     res.redirect('/')
-  }
-
+  }else{
   const noviUser = new User ({ email, slika, ime, username, url })
     const token = noviUser.napraviToken()
     noviUser.save()
@@ -36,6 +37,7 @@ router.get('/success', async (req, res) => {
       res.header('x-auth-token', token).json({msg: 'Dobili ste pristupni token', data: token})})
     .catch(err => res.status(400).send(err.message))
     res.send('You have successfully logged in')
+  }
 })
 
 router.get('/error', (req, res) => res.send('error logging in'))
