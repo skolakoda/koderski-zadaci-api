@@ -24,20 +24,22 @@ const ZadatakSchema = new mongoose.Schema(
       maxlength: 1000,
       trim: true
     },
-    testovi: {
-      input: {
-        type: String,
-        required: true
-      },
-      output: {
-        type: Number,
-        required: true
-      },
-      method: {
-        type: String,
-        required: true
+    testovi: [
+      {
+        input: {
+          type: String,
+          required: true
+        },
+        output: {
+          type: Number,
+          required: true
+        },
+        method: {
+          type: String,
+          required: true
+        }
       }
-    },
+    ],
     kategorija: {
       type: String,
       trim: true,
