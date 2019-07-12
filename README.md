@@ -17,9 +17,11 @@ Dodaj zadatak ruta: /zadaci/dodaj
   "text": "text zadatka",
   "resenje": "resenje zadatka"
   "testovi": [
+    {
     "input": string,
     "output": integer,
     "method": string
+    }
   ],
   "kategorija": "kategorija"
   "tezina": "od 0 do 10"
