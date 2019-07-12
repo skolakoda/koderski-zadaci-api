@@ -5,9 +5,9 @@
 ### Autentikacija
 
 Login ruta: /auth/github
+Dodaj zadatak ruta: /zadaci/dodaj
 
 ### Model zadatka
-
 
 ```
 {
@@ -18,9 +18,7 @@ Login ruta: /auth/github
 }
 ```
 
-
 ### Model korisnika
-
 
 ```
 {
