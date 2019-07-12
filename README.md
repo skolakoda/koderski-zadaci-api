@@ -5,6 +5,7 @@
 ### Autentikacija
 
 Login ruta: /auth/github
+
 Dodaj zadatak ruta: /zadaci/dodaj
 
 ### Model zadatka
