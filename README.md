@@ -1,5 +1,18 @@
 # Koderski Zadaci API
 
+## Razvoj
+
+```
+npm i
+npm run dev
+```
+
+Linter popravka:
+
+```
+npm run lint
+```
+
 ## API Dokumentacija
 
 ### Autentikacija
@@ -31,3 +44,7 @@ Login ruta: /auth/github
   "bodovi": "od 0 do 1000"
 }
 ```
+
+## Kodni standard
+
+[Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript)
