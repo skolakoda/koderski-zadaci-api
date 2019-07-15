@@ -6,21 +6,29 @@
 
 Login ruta: /auth/github
 
-### Model zadatka
+Dodaj zadatak ruta: /zadaci/dodaj
 
+### Model zadatka
 
 ```
 {
+  "naslov": "text zadatka",
+  "ime": "ime zadatka"
   "text": "text zadatka",
-  "resenje": "resenje zadatka",
+  "resenje": "resenje zadatka"
+  "testovi": [
+    {
+    "input": string,
+    "output": integer,
+    "method": string
+    }
+  ],
   "kategorija": "kategorija"
   "tezina": "od 0 do 10"
 }
 ```
 
-
 ### Model korisnika
-
 
 ```
 {
