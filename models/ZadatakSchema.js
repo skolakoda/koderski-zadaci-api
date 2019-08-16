@@ -19,6 +19,10 @@ const ZadatakSchema = new mongoose.Schema(
       unique: true,
       required: true
     },
+    body: {
+      type: String,
+      required: true
+    },
     resenje: {
       type: String,
       maxlength: 1000,
